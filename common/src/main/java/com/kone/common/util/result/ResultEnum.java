@@ -10,7 +10,8 @@ import lombok.Getter;
 
 @Getter
 public enum ResultEnum {
-    SUCCESS(2000, "success");
+    SUCCESS(2000, "success"),
+    SYSTEM_ERROR(5000, "system error");
 
     private Integer code;
     private String msg;

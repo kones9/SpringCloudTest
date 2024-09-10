@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import com.kone.common.model.entity.TPay;
 import com.kone.common.service.TPayService;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @description: 订单控制层
  * @author: Kone
@@ -43,6 +45,11 @@ public class PayController {
 
     @GetMapping("/get/{id}")
     public Result<TPay> getPay(@PathVariable("id") Integer id) {
+        try {
+            TimeUnit.SECONDS.sleep(62);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return Result.success(tPayService.getById(id));
     }
 

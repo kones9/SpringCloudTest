@@ -1,7 +1,9 @@
 package com.kone.feign.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.kone.common.model.dto.TPayDTO;
 import com.kone.common.util.result.Result;
+import com.kone.common.util.result.ResultEnum;
 import com.kone.feign.api.PayFeignApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +41,14 @@ public class OrderController {
 
     @GetMapping("/get/{id}")
     public Result<?> getPay(@PathVariable("id") String id) {
-        return payFeignApi.getPay(id);
+        try {
+            System.out.println("调用开始----" + DateUtil.now());
+            return payFeignApi.getPay(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("调用结束----" + DateUtil.now());
+            return Result.fail(ResultEnum.SYSTEM_ERROR, e.getMessage());
+        }
     }
 
     @GetMapping("/get/info")

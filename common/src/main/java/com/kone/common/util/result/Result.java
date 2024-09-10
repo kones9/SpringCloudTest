@@ -40,4 +40,8 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> fail(Integer code, String msg) {
         return new Result<T>(code, msg, null);
     }
+
+    public static <T> Result<T> fail(ResultEnum resultEnum, String msg) {
+        return new Result<T>(resultEnum.getCode(), msg, null);
+    }
 }
