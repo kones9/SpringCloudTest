@@ -5,6 +5,7 @@ import com.kone.common.model.dto.TPayDTO;
 import com.kone.common.util.result.Result;
 import com.kone.common.util.result.ResultEnum;
 import com.kone.feign.api.PayFeignApi;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -64,9 +65,9 @@ public class OrderController {
      * @return 响应内容
      */
     @GetMapping("/circuit/get/{id}")
-    @CircuitBreaker(name = "cloud-payment-service", fallbackMethod = "myCircuitFallback")
-    public Result<?> myCircuit(@PathVariable("id") Integer id) {
-        return payFeignApi.myCircuit(id);
+    @CircuitBreaker(name = "cloud-payment-service", fallbackMethod = "testCircuitBreakerFallback")
+    public Result<?> testCircuitBreaker(@PathVariable("id") Integer id) {
+        return payFeignApi.testCircuitBreaker(id);
     }
 
     /**
@@ -77,8 +78,33 @@ public class OrderController {
      * @param t  错误信息
      * @return 响应结果
      */
-    public Result<?> myCircuitFallback(Integer id, Throwable t) {
+    public Result<?> testCircuitBreakerFallback(Integer id, Throwable t) {
         // 这里是容错处理逻辑，返回备用结果
         return Result.fail(ResultEnum.SYSTEM_ERROR, "myCircuitFallback，系统繁忙，请稍后再试-----/(ㄒoㄒ)/" + t.getMessage());
+    }
+
+    /**
+     * 隔离测试（基于信号标）
+     *
+     * @param id 输入id
+     * @return 响应内容
+     */
+    @GetMapping("/bulkhead/get/{id}")
+    @Bulkhead(name = "cloud-payment-service", fallbackMethod = "testBulkHeadFallback", type = Bulkhead.Type.SEMAPHORE)
+    public Result<?> testBulkHead(@PathVariable("id") Integer id) {
+        return payFeignApi.testBulkHead(id);
+    }
+
+    /**
+     * testBulkHeadFallback就是服务降级后的兜底处理方法
+     * 返回值应和断路器请求方法一致，否则报错，找不到方法
+     *
+     * @param id 请求参数
+     * @param t  错误信息
+     * @return 响应结果
+     */
+    public Result<?> testBulkHeadFallback(Integer id, Throwable t) {
+        // 这里是容错处理逻辑，返回备用结果
+        return Result.fail(ResultEnum.SYSTEM_ERROR, "myBulkheadFallback，隔板超出最大数量限制，系统繁忙，请稍后再试-----/(ㄒoㄒ)/~~" + t.getMessage());
     }
 }

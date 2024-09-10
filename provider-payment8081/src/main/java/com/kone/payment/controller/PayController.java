@@ -69,7 +69,7 @@ public class PayController {
      * @return 响应信息
      */
     @GetMapping("/circuit/{id}")
-    public Result<String> myCircuit(@PathVariable("id") Integer id) {
+    public Result<String> testCircuitBreaker(@PathVariable("id") Integer id) {
         if (id == -4) throw new RuntimeException("----circuit id 不能负数");
         if (id == 9999) {
             try {
@@ -79,5 +79,31 @@ public class PayController {
             }
         }
         return Result.success("Hello, circuit! inputId:  " + id + " \t " + IdUtil.simpleUUID());
+    }
+
+    /**
+     * 隔离测试
+     *
+     * @param id 接受id
+     * @return 响应信息
+     */
+    @GetMapping("/bulkhead/{id}")
+    public Result<String> testBulkHead(@PathVariable("id") Integer id) {
+        if (id == -4) throw new RuntimeException("----bulkhead id 不能负数");
+        if (id == 10) {
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (id == 11) {
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return Result.success("Hello, bulkhead! inputId:  " + id + " \t " + IdUtil.simpleUUID());
     }
 }

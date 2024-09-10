@@ -31,5 +31,8 @@ public interface PayFeignApi {
     Result<?> getPayInfo();
 
     @GetMapping("/pay/circuit/{id}")
-    Result<?> myCircuit(@PathVariable("id") Integer id);
+    Result<?> testCircuitBreaker(@PathVariable("id") Integer id);
+
+    @GetMapping("/pay/bulkhead/{id}")
+    Result<?> testBulkHead(@PathVariable("id") Integer id);
 }
