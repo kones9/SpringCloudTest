@@ -1,6 +1,5 @@
 package com.kone.payment.controller;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.IdUtil;
 import com.kone.common.util.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,13 +90,6 @@ public class PayController {
     public Result<String> testBulkHead(@PathVariable("id") Integer id) {
         if (id == -4) throw new RuntimeException("----bulkhead id 不能负数");
         if (id == 10) {
-            try {
-                TimeUnit.SECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if (id == 11) {
             try {
                 TimeUnit.SECONDS.sleep(10);
             } catch (InterruptedException e) {

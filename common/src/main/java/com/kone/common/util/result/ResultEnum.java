@@ -11,7 +11,8 @@ import lombok.Getter;
 @Getter
 public enum ResultEnum {
     SUCCESS(2000, "success"),
-    SYSTEM_ERROR(5000, "system error");
+    SYSTEM_ERROR(5000, "system error"),
+    SYSTEM_BUSY(5001, "system busy");
 
     private Integer code;
     private String msg;
