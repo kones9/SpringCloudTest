@@ -1,6 +1,7 @@
 package com.kone.payment.controller;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.IdUtil;
 import com.kone.common.util.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,7 +48,7 @@ public class PayController {
     public Result<TPay> getPay(@PathVariable("id") Integer id) {
         try {
             TimeUnit.SECONDS.sleep(62);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return Result.success(tPayService.getById(id));
@@ -59,5 +60,24 @@ public class PayController {
     @GetMapping(value = "/get/info")
     private Result<String> getInfoByConsul(@Value("${kone.info}") String koneInfo) {
         return Result.success("koneInfo: " + koneInfo + "\t" + "port: " + port);
+    }
+
+    /**
+     * 服务熔断测试
+     *
+     * @param id 接受id
+     * @return 响应信息
+     */
+    @GetMapping("/circuit/{id}")
+    public Result<String> myCircuit(@PathVariable("id") Integer id) {
+        if (id == -4) throw new RuntimeException("----circuit id 不能负数");
+        if (id == 9999) {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return Result.success("Hello, circuit! inputId:  " + id + " \t " + IdUtil.simpleUUID());
     }
 }

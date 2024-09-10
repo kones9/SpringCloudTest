@@ -29,4 +29,7 @@ public interface PayFeignApi {
 
     @GetMapping("/pay/get/info")
     Result<?> getPayInfo();
+
+    @GetMapping("/pay/circuit/{id}")
+    Result<?> myCircuit(@PathVariable("id") Integer id);
 }
