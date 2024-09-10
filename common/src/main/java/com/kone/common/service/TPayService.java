@@ -1,7 +1,7 @@
-package com.kone.service;
+package com.kone.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kone.model.entity.TPay;
+import com.kone.common.model.entity.TPay;
 
 /**
  * @author kone

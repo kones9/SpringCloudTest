@@ -1,7 +1,7 @@
 package com.kones.controller;
 
-import com.kone.model.dto.TPayDTO;
-import com.kone.util.result.Result;
+import com.kone.common.model.dto.TPayDTO;
+import com.kone.common.util.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;

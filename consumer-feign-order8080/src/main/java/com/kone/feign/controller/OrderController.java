@@ -1,8 +1,8 @@
-package com.kones.controller;
+package com.kone.feign.controller;
 
-import com.kone.model.dto.TPayDTO;
-import com.kone.util.result.Result;
-import com.kones.api.PayFeignApi;
+import com.kone.common.model.dto.TPayDTO;
+import com.kone.common.util.result.Result;
+import com.kone.feign.api.PayFeignApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

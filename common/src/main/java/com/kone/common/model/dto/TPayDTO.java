@@ -1,4 +1,4 @@
-package com.kone.model.dto;
+package com.kone.common.model.dto;
 
 import lombok.Data;
 

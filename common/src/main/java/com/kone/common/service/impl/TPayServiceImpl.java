@@ -1,9 +1,9 @@
-package com.kone.service.impl;
+package com.kone.common.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kone.mapper.TPayMapper;
-import com.kone.model.entity.TPay;
-import com.kone.service.TPayService;
+import com.kone.common.mapper.TPayMapper;
+import com.kone.common.model.entity.TPay;
+import com.kone.common.service.TPayService;
 import org.springframework.stereotype.Service;
 
 /**

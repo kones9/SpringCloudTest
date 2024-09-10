@@ -1,4 +1,4 @@
-package com.kone.model.entity;
+package com.kone.common.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

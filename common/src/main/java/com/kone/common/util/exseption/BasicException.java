@@ -1,4 +1,4 @@
-package com.kone.util.exseption;
+package com.kone.common.util.exseption;
 
 public class BasicException extends RuntimeException {
     public BasicException(String message) {

@@ -1,7 +1,7 @@
-package com.kone.mapper;
+package com.kone.common.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kone.model.entity.TPay;
+import com.kone.common.model.entity.TPay;
 
 /**
 * @author kone

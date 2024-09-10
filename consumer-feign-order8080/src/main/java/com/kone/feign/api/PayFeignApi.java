@@ -1,7 +1,7 @@
-package com.kones.api;
+package com.kone.feign.api;
 
-import com.kone.model.dto.TPayDTO;
-import com.kone.util.result.Result;
+import com.kone.common.model.dto.TPayDTO;
+import com.kone.common.util.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

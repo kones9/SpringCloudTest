@@ -1,4 +1,4 @@
-package com.kone.config;
+package com.kone.common.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @version: 1.0.0
  **/
 @Configuration
-@MapperScan("com.kone.mapper")
+@MapperScan("com.kone.common.mapper")
 public class MybatisPlusConfig {
     /**
      * 添加分页插件

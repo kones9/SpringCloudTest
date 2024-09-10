@@ -1,4 +1,4 @@
-package com.kone.util.result;
+package com.kone.common.util.result;
 
 import lombok.Data;
 
