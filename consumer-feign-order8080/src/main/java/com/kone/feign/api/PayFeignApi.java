@@ -30,12 +30,15 @@ public interface PayFeignApi {
     @GetMapping("/pay/get/info")
     Result<?> getPayInfo();
 
-    @GetMapping("/pay/circuit/{id}")
+    @GetMapping("/circuit/{id}")
     Result<?> testCircuitBreaker(@PathVariable("id") Integer id);
 
-    @GetMapping("/pay/bulkhead/{id}")
+    @GetMapping("/bulkhead/{id}")
     Result<?> testBulkHead(@PathVariable("id") Integer id);
 
-    @GetMapping(value = "/pay/ratelimiter/{id}")
+    @GetMapping(value = "/ratelimiter/{id}")
     Result<?> testRateLimiter(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/micrometer/{id}")
+    String testMicrometer(@PathVariable("id") Integer id);
 }
