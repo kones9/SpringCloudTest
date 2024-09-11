@@ -7,6 +7,7 @@ import com.kone.common.util.result.ResultEnum;
 import com.kone.feign.api.PayFeignApi;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,7 +68,7 @@ public class OrderController {
      * @param id 输入id
      * @return 响应内容
      */
-    @GetMapping("/circuit/get/{id}")
+    @GetMapping("/circuit/{id}")
     @CircuitBreaker(name = "cloud-payment-service", fallbackMethod = "testCircuitBreakerFallback")
     public Result<?> testCircuitBreaker(@PathVariable("id") Integer id) {
         return payFeignApi.testCircuitBreaker(id);
@@ -133,5 +134,15 @@ public class OrderController {
      */
     public CompletableFuture<Result<?>> testBulkHeadThreadPoolFallback(Integer id, Throwable t) {
         return CompletableFuture.supplyAsync(() -> Result.fail(ResultEnum.SYSTEM_BUSY));
+    }
+
+    @GetMapping(value = "/ratelimiter/{id}")
+    @RateLimiter(name = "cloud-payment-service", fallbackMethod = "testRateLimiterFallback")
+    public Result<?> testRateLimiter(@PathVariable("id") Integer id) {
+        return payFeignApi.testRateLimiter(id);
+    }
+
+    public Result<?> testRateLimiterFallback(Integer id, Throwable t) {
+        return Result.fail(ResultEnum.SYSTEM_ERROR, "你被限流了，禁止访问/(ㄒoㄒ)/~~");
     }
 }

@@ -35,4 +35,7 @@ public interface PayFeignApi {
 
     @GetMapping("/pay/bulkhead/{id}")
     Result<?> testBulkHead(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/pay/ratelimiter/{id}")
+    Result<?> testRateLimiter(@PathVariable("id") Integer id);
 }

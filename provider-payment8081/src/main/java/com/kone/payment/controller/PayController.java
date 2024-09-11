@@ -98,4 +98,15 @@ public class PayController {
         }
         return Result.success("Hello, bulkhead! inputId:  " + id + " \t " + IdUtil.simpleUUID());
     }
+
+    /**
+     * ReteLimiter限流
+     *
+     * @param id 接受id
+     * @return 响应信息
+     */
+    @GetMapping(value = "/ratelimiter/{id}")
+    public Result<String> testRateLimiter(@PathVariable("id") Integer id) {
+        return Result.success("Hello, testRateLimiter欢迎到来 inputId:  " + id + " \t " + IdUtil.simpleUUID());
+    }
 }
