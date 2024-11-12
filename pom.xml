@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kone</groupId>
-    <artifactId>SpringCloud</artifactId>
+    <artifactId>spring-cloud</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
@@ -37,6 +37,7 @@
         <micrometer-observation.version>1.12.0</micrometer-observation.version>
         <feign-micrometer.version>12.5</feign-micrometer.version>
         <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -153,10 +154,14 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
